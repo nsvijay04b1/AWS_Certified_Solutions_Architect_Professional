@@ -1,0 +1,14 @@
+# Amazon Inspector:
+- Assesses applications for exposure, vulnerabilities, and deviations from best practices.
+- Assessments can be automated to integrate with deployment pipelines.
+- Optional agent on EC2 instances: collects installed package information and software configuration.
+- You can use Amazon Inspector to assess your assessment targets (collections of AWS resources) for potential security issues and vulnerabilities.
+- Compares the behavior and the security configuration of the assessment targets to selected security rules packages. 
+- A rule is a security check that Amazon Inspector performs during the assessment run.
+- Rules are grouped into distinct rules packages either by category, severity, or pricing.
+- Rule Severity: High, Medium, Low or Informational.
+- Available rule packages:
+	- Network Reachability (network assessment).
+	- Common vulnerabilities and exposures (host assessment).
+	- Center for Internet Security (CIS) Benchmarks (host assessment).
+	- Security best practices for Amazon Inspector (host assessment).

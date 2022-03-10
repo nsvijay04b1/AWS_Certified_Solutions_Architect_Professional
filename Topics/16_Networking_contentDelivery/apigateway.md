@@ -1,0 +1,34 @@
+API Gateway:
+- A service for creating, publishing, maintaining, monitoring, and securing APIs.
+- Supported API types: REST, HTTP, and WebSocket.
+- Authentication mechanisms:
+	- AWS IAM policies,
+	- Lambda authorizer function. Also called Custom Authorizer. Takes the caller's identity as input and returns an IAM policy as output.
+	- Amazon Cognito user pools.
+	- OIDC and OAuth 2.0 (HTTP APIs only). 
+- Supports CORS.
+- Developer portal for publishing your APIs.
+- Integration with AWS WAF.
+- Throttling supported: 
+	- You can set the standard rates and burst rates.
+	- Server-side throttling limits are applied across all clients.
+	- Per-client throttling limits are applied to clients that use API keys associated with your usage policy as client identifier.
+- Caching:
+	- Supported on REST APIs only.
+	- You can specify its size and TTL.
+	- Max & Default TTL = 3600 s.
+- Compression (request & response) supported.
+- Can generate a client-side certificate to authenticate with the backend.
+- API endpoint:
+	- A hostname for an API in API Gateway that is deployed to a specific Region.
+	- The hostname is of the form {api-id}.execute-api.{region}.amazonaws.com.
+- Supported types of API endpoints: Edge-optimized, Private, Regional. 
+- Edge-optimized API endpoint:
+	- The default hostname of an API Gateway API that is deployed to the specified Region while using a CloudFront distribution to facilitate client access typically from across AWS Regions. 
+	- API requests are routed to the nearest CloudFront Point of Presence (POP), which typically improves connection time for geographically diverse clients. 
+- Private API endpoint:
+	- exposed through interface VPC endpoints and allows a client to securely access private API resources inside a VPC.
+	- Private APIs are isolated from the public internet, and they can only be accessed using VPC endpoints for API Gateway that have been granted access. 
+- Regional API endpoint:
+	- deployed to the specified Region and intended to serve clients, such as EC2 instances, in the same AWS Region.
+	- For in-Region requests, a Regional endpoint bypasses the unnecessary round trip to a CloudFront distribution.

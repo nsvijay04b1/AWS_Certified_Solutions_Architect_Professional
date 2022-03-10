@@ -1,0 +1,60 @@
+# CloudFormation:
+- A provisioning automation service for setting up AWS services. 
+- Stacks: 
+	- you manage related resources as a single unit called a stack. 
+	- You create, update, and delete a collection of resources by creating, updating, and deleting stacks. 
+	- Stacks can be nested. E.g. An application stack referencing a network stack.
+	- Stacks are created using CloudFromation templates.
+	- Stack creation errors: by default the whole stack is rolled back.
+- Templates:
+	- You create a template that describes all the AWS resources that you want and AWS CloudFormation takes care of provisioning and configuring those resources for you. 
+	- A template is a JSON or YAML formatted text file used as a blueprint for building your AWS resources.
+	- Templates include several major sections. The Resources section is the only required section.
+	- Templates can be imported from S3 or uploaded from your computer.
+- Parameters Section:
+	- Values to pass to your template at runtime (when you create or update a stack). 
+	- You can refer to parameters from the Resources and Outputs sections of the template.
+	- You can have a maximum of 200 parameters in a template.
+	- Parameters can be marked as mandatory or optional. In the latter case, you provide a default value.
+- Rules section:
+	- Validates a parameter or a combination of parameters passed to a template during a stack creation or stack update.
+- Mappings section:
+	- a mappings section can include multiple maps.
+	- Each map is a list of map keys.
+	- Each map key points to a dictionary of key-value pairs.
+	- Eg: map of Regions: map key = region name. Key-value pairs: AMI IDs in that region.
+	- You can match a key to a corresponding value by using the Fn::FindInMap intrinsic function in the Resources and Outputs sections. 
+- Resources section:
+	- Specifies the stack resources and their properties, such as an EC2 instance or an S3 bucket. 
+	- You can refer to resources in the Resources and Outputs sections of the template.
+	- With the DependsOn attribute you can specify that the creation of a specific resource follows another. 
+- Outputs section:
+	- A list of dictionaries with the following keys: OutputKey, OutputValue, Description.
+	- You can declare a maximum of 200 outputs in a template. 
+- Stack modification:
+	- you can make changes to a stack without having to tear it down and recreate it.
+	- Direct Changes: used for quick changes.
+	- Change Set: used for more complex changes and when you want to review the changes before applying them. A change set is saved.
+- Stack drifting:
+	- CloudFromation can detect drifted configurations: resources that have been changed from outside CloudFormation and therefore do not match the template anymore.
+	- Not supported on all resources.
+	- The execution of a stack drifting search is launched manually.
+- StackSets:
+	- StackSets extends the functionality of stacks by enabling you to create, update, or delete stacks across multiple accounts and regions with a single operation. 
+	- A stack instance is a reference to a stack in a target account within a Region. 
+	- Using an administrator account, you define and manage an AWS CloudFormation template, and use the template as the basis for provisioning stacks into selected target accounts across specified regions. 
+	- An administrator account is the AWS account in which you create stack sets. 
+	- A target account is the account into which you create, update, or delete one or more stacks in your stack set. 
+	- Stack sets can be created using either self-managed permissions or service-managed permissions.
+	- With self-managed permissions, you create the IAM roles in each target account to enable the deployment of the stack instances.
+	- With service-managed permissions, you can deploy stack instances to accounts managed by AWS Organizations. StackSets creates the necessary IAM roles on your behalf in current and future accounts of the Organization.
+- Deletion Policy:
+	- With the DeletionPolicy attribute you can preserve, and in some cases, backup a resource when its stack is deleted.
+	- You specify a DeletionPolicy attribute for each resource that you want to control. 
+	- If a resource has no DeletionPolicy attribute, AWS CloudFormation deletes the resource by default. Exception: The default policy is Snapshot for RDS.
+	- To keep a resource when its stack is deleted, specify "DeletionPolicy: Retain" for that resource. 
+	- You can choose also "DeletionPolicy: Snapshot" for the following resources: EC2 Volume, RDS, Redshift, ElastiCache, Neptune.
+- Puppet and Chef Integration.
+- You can define Bootstrap scripts.
+- Supports WaitCondition
+

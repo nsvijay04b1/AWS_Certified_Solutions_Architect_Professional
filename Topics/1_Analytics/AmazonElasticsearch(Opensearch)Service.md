@@ -1,0 +1,19 @@
+# Amazon Elasticsearch Service (Amazon ES):
+- A managed service to deploy, operate, and scale Elasticsearch clusters in the AWS Cloud. 
+- Elasticsearch is a popular open-source search and analytics engine for use cases such as log analytics, real-time application monitoring, and clickstream analysis. 
+- Elasticsearch is very powerful for analyzing and visualizing realtime data and real-time search. For example, you can visualize and search CloudWatch Log logs.
+- Kibana:
+	- Visualization tool.
+	- Supports Amazon Cognito, HTTP basic, or SAML authentication.
+- Domain:
+	- An Elasticsearch domain is a cluster of nodes.
+	- Amazon ES provisions all the resources for your Elasticsearch cluster and launches it.
+	- Dedicated master nodes to offload cluster management tasks
+	- Automatically detects and replaces failed Elasticsearch nodes.
+	- Can scale with a single API call.
+- High Availability:
+	- Supports Multi-AZ.
+	- Automated snapshots to back up and restore Amazon ES domains.
+- Security:
+	- Network configuration: can be VPC or Public access.
+	- Supports at-rest and in-transit encryption. These options cannot be changed.

@@ -35,20 +35,26 @@ The AWS Certified Solutions Architect – Professional (SAP-C01) exam preparatio
  - [AWS Glue](Topics/1_Analytics/AWSGlue.md)
  - [Amazon Kinesis](Topics/1_Analytics/AmazonKinesis.md)
  - [Amazon QuickSight](/home/k8s/mylinux/aws/AWS_Certified_Solutions_Architect_Professional/Topics/1_Analytics/AmazonQuickSight.md)
+
 ## 2. AWS Billing and Cost Management:
  - [AWS Budgets](Topics/2_AWSBilling_CostManagement/AWSBudgets.md)
  - [Cost Explorer](Topics/2_AWSBilling_CostManagement/CostExplorer.md)
+
 ## 3. Application integration:
  - [Amazon MQ](Topics/3_Applicationintegration/AmazonMQ.md)
  - [Amazon Simple Notification Service (Amazon SNS)](Topics/3_Applicationintegration/AmazonSNS.md)
  - [Amazon Simple Queue Service (Amazon SQS)](Topics/3_Applicationintegration/AmazonSQS.md)
  - [AWS Step Functions](Topics/3_Applicationintegration/AWSStepFunctions.md)
+ - [AWS Simple Workflow Service(SWF)](Topics/3_Applicationintegration/SWF.md)
+
 ## 4. Business applications:
  - [Amazon Alexa](Topics/4_BusinessApplications/AmazonAlexa.md)
  - [Amazon Alexa for Business](Topics/4_BusinessApplications/AmazonAlexa_Business.md)
  - [Amazon Simple Email Service (Amazon SES)](Topics/4_BusinessApplications/AmazonSES.md)
+
 ## 5. Blockchain:
  - [Amazon Managed Blockchain](Topics/5_Blockchain/AmazonManagedBlockchain.md)
+
 ## 6. Compute:
  - [AWS Batch](Topics/6_Compute/AWSBatch.md)
  - [Amazon EC2](Topics/6_Compute/AmazonEC2.md)
@@ -60,26 +66,35 @@ The AWS Certified Solutions Architect – Professional (SAP-C01) exam preparatio
  - [AWS Lambda](Topics/6_Compute/Lambda.md)
  - [Amazon Lightsail/Amplify](Topics/6_Compute/AmazonLightsail.md)
  - [AWS Outposts](Topics/6_Compute/AWSOutposts.md)
+
 ## 7. Containers:
  - Amazon Elastic Container Registry (Amazon ECR)
+
 ## 8. Database:
- - Amazon Aurora
- - Amazon DynamoDB
- - Amazon ElastiCache
- - Amazon Neptune
- - Amazon RDS
- - Amazon Redshift
+ - [DB features summary](Topics/8_Database/DB_summary.md)
+ - [Amazon Aurora](Topics/8_Database/Aurora.md)
+ - [Amazon DynamoDB](Topics/8_Database/DynamoDB.md)
+ - [Amazon ElastiCache](Topics/8_Database/Elasticache.md)
+ - [Amazon Neptune](Topics/8_Database/Neptune.md)
+ - [Amazon RDS](Topics/8_Database/RDS.md)
+ - [Amazon Redshift](Topics/8_Database/RedShift.md)
+ - [Amazon DocumentDB](Topics/8_Database/DocumentDB.md)
+
 ## 9. Developer tools:
- - AWS Cloud9
- - AWS CodeBuild
- - AWS CodeCommit
- - AWS CodeDeploy
- - AWS CodePipeline
+ - [AWS Cloud9](Topics/9_Developertools/Cloud9.md)
+ - [AWS CodeBuild](Topics/9_Developertools/CodeBuild.md)
+ - [AWS CodeCommit](Topics/9_Developertools/CodeCommit.md)
+ - [AWS CodeDeploy](Topics/9_Developertools/CodeDeploy.md)
+ - [AWS CodePipeline](Topics/9_Developertools/Codepipeline.md)
+ - [AWS Signer](Topics/9_Developertools/AWSSigner.md)
+
 ## 10. End user computing:
  - Amazon AppStream 2.0
  - Amazon WorkSpaces
+
 ## 11. Front-end web and mobile:
- - AWS AppSync
+ - [AWS AppSync](Topics/11_Front-end_web_and_mobile/AppSync.md)
+
 ## 12. Machine learning:
  - Amazon Comprehend
  - Amazon Forecast
@@ -88,57 +103,67 @@ The AWS Certified Solutions Architect – Professional (SAP-C01) exam preparatio
  - Amazon SageMaker
  - Amazon Transcribe
  - Amazon Translate
+
 ## 13. Management and governance:  
  - AWS Auto Scaling  
  - [AWS Backup/DLM](Topics/13_Management_Governance/backup.md) 
- - AWS CloudFormation  
+ - [AWS CloudFormation](Topics/13_Management_Governance/CloudFormation.md)
  - [AWS CloudTrail](Topics/13_Management_Governance/cloudtrail.md)  
  - [Amazon CloudWatch](Topics/13_Management_Governance/cloudwatch.md)
  - AWS Compute Optimizer  
  - [AWS Config](Topics/13_Management_Governance/config.md)  
  - [AWS Control Tower](Topics/13_Management_Governance/control_tower.md) 
- - Amazon EventBridge  
+ - [Amazon EventBridge](Topics/13_Management_Governance/eventBridge.md)
  - AWS License Manager  
  - [AWS Organizations](Topics/17_Security_Identity_Compliance/Organizations.md)
  - [AWS Resource Access Manager](Topics/13_Management_Governance/AWS_RAM.md) 
  - [AWS Service Catalog](Topics/13_Management_Governance/service_catalog.md)
- - AWS Systems Manager  
+ - [AWS Systems Manager](Topics/13_Management_Governance/AWS_SSM.md) 
  - [AWS Trusted Advisor](Topics/13_Management_Governance/Trusted_Advisor.md) 
  - [AWS Well-Architected Tool](Topics/13_Management_Governance/well_architected_tool.md)
+
 ## 14. Media services:  
  - Amazon Elastic Transcoder
+
 ## 15. Migration and transfer:  
- - AWS Database Migration Service (AWS DMS)  
+ - [AWS Database Migration Service (AWS DMS)](Topics/15_Migration_and_transfer/DMS.md) 
  - [AWS DataSync](Topics/15_Migration_and_transfer/dataSync.md)
- - AWS Migration Hub  
- - AWS Server Migration Service (AWS SMS)  
- - AWS Snowball  
- - AWS Transfer Family
+ - [AWS Migration Hub](Topics/15_Migration_and_transfer/migrationHUB.md) 
+ - [AWS Server Migration Service (AWS SMS)](Topics/15_Migration_and_transfer/Server_migration_service.md)  
+ - [AWS Snowball](Topics/15_Migration_and_transfer/snowball.md) 
+ - [AWS Transfer Family](Topics/15_Migration_and_transfer/AWSTranferFamily.md) 
+ - [AWS Data Pipeline](Topics/15_Migration_and_transfer/DataPipeline.md)
+
 ## 16. Networking and content delivery:
- - Amazon API Gateway  
- - Amazon CloudFront  
- - AWS Direct Connect  
+ - [Amazon API Gateway](Topics/16_Networking_contentDelivery/apigateway.md)  
+ - [Amazon CloudFront](Topics/16_Networking_contentDelivery/CloudFront.md)
+ - [AWS Direct Connect](Topics/16_Networking_contentDelivery/DirectConnect(DX).md)
  - AWS Global Accelerator  
- - Amazon Route 53  
- - AWS Transit Gateway  
- - Amazon VPC
+ - [Amazon Route 53](Topics/16_Networking_contentDelivery/route53.md)
+ - [AWS Transit Gateway](Topics/16_Networking_contentDelivery/transit_gateway.md)
+ - [Amazon VPC](Topics/16_Networking_contentDelivery/VPC.md)
+ - [Virtual Private Gateway](Topics/16_Networking_contentDelivery/virtual_private_gateway.md)
+
 ## 17. Security, identity, and compliance:
  - [AWS Artifact](Topics/17_Security_Identity_Compliance/Artifact.md) 
- - AWS Certificate Manager (ACM)  
+ - [AWS Certificate Manager (ACM)](Topics/17_Security_Identity_Compliance/ACM.md)
  - [Amazon Cognito](Topics/17_Security_Identity_Compliance/Cognito.md)
  - [AWS Directory Service](Topics/17_Security_Identity_Compliance/AWSDirectoryService.md)
- - Amazon GuardDuty  
+ - [Amazon GuardDuty ](Topics/17_Security_Identity_Compliance/GuardDuty.md)
+ - [Amazon Detective](Topics/17_Security_Identity_Compliance/detective.md)
  - [AWS Identity and Access Management (IAM)](Topics/17_Security_Identity_Compliance/IAM.md) 
- - Amazon Inspector  
- - AWS Key Management Service (AWS KMS)
- - Amazon Macie
- - AWS Resource Access Manager
- - AWS Secrets Manager
- - AWS Security Hub
- - AWS Shield
+ - [Amazon Inspector](Topics/17_Security_Identity_Compliance/Inspector.md)
+ - [AWS Key Management Service (AWS KMS)](Topics/17_Security_Identity_Compliance/KMS.md)
+ - [Amazon Macie](Topics/17_Security_Identity_Compliance/macie.md)
+ - [AWS Secrets Manager](Topics/17_Security_Identity_Compliance/SecretManager.md)
+ - [AWS Security Hub](Topics/17_Security_Identity_Compliance/SecurityHUB.md)
+ - [AWS Shield](Topics/17_Security_Identity_Compliance/Shield.md)
  - [AWS Single Sign-On](Topics/17_Security_Identity_Compliance/SSO.md) 
- - AWS WAF
+ - [AWS WAF](Topics/17_Security_Identity_Compliance/WAF.md)
  - [AWS STS](Topics/17_Security_Identity_Compliance/STS.md) 
+ - [AWS Network Firewall](Topics/17_Security_Identity_Compliance/Network_firewall.md)
+ - [AWS Firewall Manager](Topics/17_Security_Identity_Compliance/Firewall_Manager.md)
+
 ## 18. Storage:
  - [Amazon Elastic Block Store (Amazon EBS)](Topics/18_Storage/EBS.md)
  - [Amazon Elastic File System (Amazon EFS)](Topics/18_Storage/EFS.md)
@@ -147,10 +172,12 @@ The AWS Certified Solutions Architect – Professional (SAP-C01) exam preparatio
  - [Amazon S3 Glacier](Topics/18_Storage/glacier.md)
  - [AWS Storage Gateway](Topics/18_Storage/Storage_gateway.md)
  - [Amazon WorkDocs](Topics/18_Storage/workdocs.md)
+
 ## 19. Other Services:
  - [AWS Personal Health Dashboard (PHD)](Topics/19_other_services/AWS_PHD.md)
  - [AWS Wavelength](Topics/19_other_services/Wavelength.md)
  - [VMware Cloud on AWS](Topics/19_other_services/WMwareCloudonAWS.md)
+ - [AWS IoT](Topics/19_other_services/IOT.md)
 
 
 # Other links to read

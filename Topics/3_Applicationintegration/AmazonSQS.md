@@ -1,0 +1,45 @@
+Amazon Simple Queue Service (SQS):
+- offers a secure, durable, and available hosted queue that lets you integrate and decouple distributed software systems and components. 
+- Push-pull mechanism.
+- You control who can send messages to and receive messages from an Amazon SQS queue.
+- Two Queue types:
+	- Standard: Best effort ordering, at-least-once message delivery, unlimited throughput.
+	- FIFO: FIFO ordering, exactly-once message processing, limited throughput: 300 API calls per second, up to 10 messages per API call. So max is 3,000 messages per second.
+- Messages:
+	- Each message gets a Message ID.
+	- You can use message attributes to attach custom metadata to messages. 
+	- Max size: 256 KB.
+	- A message can be a pointer to an S3 or DynamoDB object.
+	- Messages are stored on multiple servers.
+	- Retention period: 1mn to 14 days. Default is 4 days.
+	- Messages can be protected by Server-Side Encryption using KMS.
+- Concurrency:
+	- Multiple producers and consumers can use the same queue at the same time. 
+	- When a message is received/collected by a consumer, it remains in the queue.
+	- To prevent other consumers from processing the message again, Amazon SQS sets a visibility timeout, a period of time during which Amazon SQS prevents other consumers from receiving and processing the message. Can be 0 sec to 12 hours. Default is 30 seconds. The consumer should delete the message from the queue after processing it.
+- Short Polling & Long Polling:
+	- SQS provides short polling (no wait) and long polling (with wait) to receive messages from a queue.
+	- By default, queues use short polling.
+- Short Polling:
+	- The ReceiveMessage request queries only a subset of the servers (based on a weighted random distribution) to find messages that are available to include in the response. 
+	- Amazon SQS sends the response right away, even if the query found no messages.
+	- To set Short polling: either in the queue parameter (WaitTimeSeconds = 0) or the request parameter (ReceiveMessageWaitTimeSeconds = 0).
+- Long Polling:
+	- The ReceiveMessage request queries all of the servers for messages. 
+	- SQS sends a response after it collects at least one available message, up to the maximum number of messages specified in the request. 
+	- SQS sends an empty response only if the polling wait time expires. 
+	- The maximum long polling wait time is 20 seconds.
+	- Long polling helps reduce the cost of using Amazon SQS by eliminating the number of empty responses.
+- Delay queues let you postpone the delivery of new messages to a queue for a number of seconds.
+- Message timers let you specify an initial invisibility period for a message added to a queue.
+- A dead-letter queue is a queue that one or more source queues can use for messages that are not consumed successfully. 
+- Supports SSE using KMS CMKs.
+- Supports anonymous access.
+- Lambda Triggers:
+	- Lambda polls the queue and invokes your Lambda function synchronously with an event that contains queue messages.
+	- Lambda reads messages in batches and invokes your function once for each batch: the event that is passed to your function contains all read messages.
+	- You can set the batch size: number of messages that Lambda will collect at once.
+	- You can set the batch window: period that Lambda should wait to collect the messages before invoking your function. Max = 5mn.
+	- Lambda continues to poll messages from the SQS standard queue until batch window expires, the payload limit is reached or full batch size is reached. 
+	- When your function successfully processes a batch, Lambda deletes its messages from the queue. 
+

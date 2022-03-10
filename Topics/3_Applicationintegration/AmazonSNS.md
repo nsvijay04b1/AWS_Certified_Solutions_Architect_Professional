@@ -1,0 +1,18 @@
+Amazon Simple Notification Service (SNS):
+- A managed service that provides message delivery from publishers to subscribers (also known as producers and consumers). 
+- Push-push mechanism.
+- Publishers communicate asynchronously with subscribers by sending messages to a topic, which is a logical access point and communication channel. 
+- Each subscriber receives its own copy of each published message.
+- Two types of subscribers:
+	- Application to Application subscribers: Kinesis Data Firehose, SQS, AWS Lambda and HTTP/S. Through Kinesis Data Firehose, you can fan out SNS notifications to S3, Redshift and 3rd party services.
+	- Application to Person subscribers: email, mobile push notifications, and SMS. 
+- A subscriber can assign a filter policy to the topic subscription. Can filter on JSON fields.
+- Two Topic types:
+	- Standard: use when message delivery order and possible message duplication are not critical. 
+	- FIFO: use to ensure strict message ordering, to define message groups, and to prevent message duplication. Only Amazon SQS FIFO queues can subscribe to a FIFO topic.
+- Published messages are stored across multiple, geographically separated servers and data centers.
+- If a subscribed endpoint isn't available, Amazon SNS runs a delivery retry policy.
+- To preserve any messages that aren't delivered before the delivery retry policy ends, you can create a dead-letter queue in SQS.
+- Message attributes let you provide any arbitrary metadata about the message.
+- You can choose to deliver raw messages (not wrapped in a structure).
+- Supports Encryption at rest.

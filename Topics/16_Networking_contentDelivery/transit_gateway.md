@@ -1,0 +1,28 @@
+# Transit Gateway (TGW):
+- Acts as a Regional virtual router for traffic flowing between your VPCs and on-premises networks. 
+- Scales elastically based on the volume of network traffic.
+- Transit gateways are highly available by design. You do not need additional transit gateways for high availability.
+- Routing through a transit gateway operates at layer 3. 
+- Supports Site-to-Site VPN connections (AWS VPN).
+- Supports multicast.
+- Supported "attachments":
+	- One or more VPCs,
+	- Direct Connect Gateway
+	- Peering connection with another transit gateway (must be in another region),
+	- A VPN Connection
+	- "Connect" SD-WAN or third party network appliance.
+- To use a Transit gateway in a VPC: 
+	- You need to attach it to a subnet.
+	- The transit gateway places a network interface in that subnet using one IP address from the subnet. 
+	- Once attached to a subnet (max 1 subnet per AZ), traffic can be routed to all subnets in that Availability Zone, not just the specified subnet. This is called « Enabling the AZ ».
+	- To be able to use the transit gateway in all the subnets of a VPC, you need to attach the transit gateway to one subnet in each Availability Zone.
+	- Resources that reside in Availability Zones where there is no transit gateway attachment will not be able to reach the transit gateway. 
+- Route table:
+	- A transit gateway has a default route table and can optionally have additional route tables. 
+	- The target of the routes could be any transit gateway attachment. 
+	- By default, transit gateway attachments are associated with the default transit gateway route table. 
+	- Each attachment is associated with exactly one route table. 
+- Number of transit gateways per Region per account: 5.
+- Maximum bandwidth:
+	- Burst per VPC, Direct Connect gateway, or peered transit gateway connection: 50 Gbps
+	- Per VPN tunnel: 1.25 Gbps. You can use ECMP to get higher VPN bandwidth by aggregating multiple VPN tunnels.

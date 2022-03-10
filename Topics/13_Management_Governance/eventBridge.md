@@ -1,0 +1,22 @@
+# Amazon EventBridge:
+- A serverless event bus service that makes it easy to connect your applications with data from a variety of sources. 
+- Allows you to build event driven architectures, which are loosely coupled and distributed. 
+- Delivers a near real-time stream of events from:
+	- System events that describe changes in AWS resources.
+	- Events from you own applications.
+	- SaaS partners like Salesforce.com.
+- Events:
+	- Events in Amazon EventBridge are represented as JSON objects. 
+	- All events have a similar structure, and the same top-level fields. 
+	- A target receives events in JSON format. 
+- Event Buses:
+	- Streams of events are collected in event buses. 
+	- CloudWatch Events: one event bus that is included by default for system events from AWS services.
+- Targets:
+	- Supported targets include: EC2, ECS, Lambda, Batch, Step Functions, SNS, SQS, Streams in Kinesis Data Streams and Kinesis Data Firehose.
+	- A rule's targets must be in the same Region as the rule.
+- Rules:
+	- A rule matches incoming events and routes them to one or more targets for processing. 
+	- A single rule can route to multiple targets, all of which are processed in parallel. 
+	- A rule can customize the JSON sent to the target.
+- To preserve any messages that aren't delivered before the delivery retry policy ends, you can create a dead-letter queue in SQS.

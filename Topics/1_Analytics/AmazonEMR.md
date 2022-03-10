@@ -1,0 +1,13 @@
+# Amazon Elastic MapReduce (EMR):
+- A managed cluster platform that simplifies running big data frameworks, such as Apache Hadoop and Apache Spark, on AWS to process and analyze vast amounts of data. 
+- When you launch your cluster, you choose the frameworks and applications to install for your data processing needs.
+- A cluster is a collection of EC2 instances (called nodes) or an EKS cluster. 
+- Amazon EMR also installs different software components on each node type, giving each node a role in a distributed application like Apache Hadoop. 
+- Master node: A node that manages the cluster by running software components to coordinate the distribution of data and tasks among other nodes for processing. 
+- Core node: A node with software components that run tasks and store data in the Hadoop Distributed File System (HDFS) on your cluster. 
+- Task node: A node with software components that only runs tasks and does not store data in HDFS. Task nodes are optional.
+- To process data in your Amazon EMR cluster, you can submit jobs or queries directly to installed applications, or you can run steps in the cluster. 
+- Generally, when you process data in EMR:
+	- The input is data stored as files in your file system, such as Amazon S3 or HDFS. 
+	- This data passes from one step to the next in the processing sequence. 
+	- The final step writes the output data to a specified location, such as an Amazon S3 bucket. 

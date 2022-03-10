@@ -1,0 +1,37 @@
+# Virtual Private Gateway (VGW):
+- A virtual private gateway is one of the VPN concentrator types on the Amazon side of the Site-to-Site VPN connection. 
+- You create a virtual private gateway and attach it to the VPC from which you want to create the Site-to-Site VPN connection. 
+- You can have only one VGW per VPC.
+- Can be associated to any VPC in the same account and same region.
+- Customer Gateway: representation of your on-prem VPN hardware gateway.
+- The VGW is redundant by default: has two virtual router nodes using two AZs and two ISPs.
+- Tunnel Redundancy:
+	- Each Site-to-Site VPN connection has two tunnels, with each tunnel using a unique virtual private gateway public IP address. 
+	- Each tunnel uses a different virtual router inside the Virtual Private Gateway service. 
+	- Automatic failover.
+- Customer Gateway Redundancy:
+	- You can set up a second Site-to-Site VPN connection to your VPC and same virtual private gateway by using a second customer gateway device. 
+	- In this case, the VGW has 4 tunnels: 2 to each customer gateway device.
+	- Use BGP for failover.
+- Performance:
+	- Each of the two tunnels supports a maximum throughput of up to 1.25 Gbps.
+	- In case of a Virtual Private Gateway with multiple VPN connections, the throughput is bound by an aggregate throughput limit from AWS to on-premises of up to 1.25 Gbps.
+	- For higher throughput, use transit gateways.
+- Accelerated Site-to-Site VPN:
+	- You can optionally enable acceleration for your Site-to-Site VPN connection. 
+	- Uses AWS Global Accelerator to route traffic from your on-premises network to an AWS edge location that is closest to your customer gateway device.
+	- Optimizes the network path, using the congestion-free AWS global network to route traffic to the endpoint that provides the best application performance
+	- When you create an accelerated VPN connection, AWS creates and manages two accelerators on your behalf, one for each VPN tunnel. Cannot be viewed.
+- The tunnel endpoint and Customer Gateway IP addresses are IPv4 only. However, the transported traffic can be either IPv4 to IPv6.
+- Supports static and BGP routing.
+- Limitations:
+	- One VGW per VPC.
+	- No scaling options.
+- Autonomous System Number (ASN):
+	- When you create a virtual private gateway, you can specify the private ASN for the Amazon side of the gateway.
+	- If you don't specify an ASN, the virtual private gateway is created with the default ASN (64512). Cannot be modified.
+- VPN CloudHub:
+	- A feature of VGW.
+	- Used to implement a convenient, potentially low-cost hub-and-spoke model for primary or backup connectivity between your remote offices. 
+	- Operates on a simple hub-and-spoke model that you can use with or without a VPC.
+	- Uses an Amazon VPC virtual private gateway with multiple customer gateways, each using unique BGP autonomous system numbers (ASNs).

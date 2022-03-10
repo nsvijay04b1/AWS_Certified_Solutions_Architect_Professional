@@ -1,0 +1,13 @@
+# Amazon DocumentDB:
+- A fully managed database service for MongoDB-compatible databases in the cloud. 
+- Data is represented as a JSON document.
+- Key Service Components
+	- Cluster volume: DocumentDB data is stored in the cluster volume, which consists of 6 copies of the data across 3 Availability Zones in a single AWS Region. 
+	- Primary DB instance: Supports read and write operations, and performs all of the data modifications to the cluster volume. One per cluster.
+	- Read replica: Connects to the same storage volume as the primary DB instance and supports only read operations. Up to 15 Replicas per cluster.
+- Backup:
+	- The backup capability in Amazon DocumentDB enables point-in-time recovery for your cluster.
+	- RPO: 5mn.
+	- Retention up to 35 days.
+	- Stored in S3.
+- Supports encryption with AWS KMS.

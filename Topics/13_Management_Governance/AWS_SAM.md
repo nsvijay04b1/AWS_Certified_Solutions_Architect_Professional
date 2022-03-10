@@ -1,0 +1,11 @@
+# AWS Serverless Application Model (AWS SAM):
+- An open-source framework that you can use to build serverless applications on AWS.
+- A serverless application is a combination of Lambda functions, event sources, and other resources that work together to perform tasks.
+- A serverless application is more than just a Lambda function—it can include additional resources such as APIs, databases, and event source mappings. 
+- SAM template specification: 
+	- You define your serverless application with a simple and clean syntax to describe the functions, APIs, permissions, configurations, and events that make up a serverless application. 
+	- SAM is an extension of CloudFormation: you can define resources by using CloudFormation in your SAM template.
+- SAM CLI: 
+	- You build serverless applications that are defined by SAM templates.
+	- The CLI provides a Lambda-like execution environment locally for testing and debugging.
+- You can publish or use server less applications in the AWS Serverless Application Repository. 
