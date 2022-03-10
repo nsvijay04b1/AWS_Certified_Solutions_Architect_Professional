@@ -19,6 +19,52 @@
 		- The second attribute is called the Sort Key (or the Range Attribute).
 - All items with the same partition key value are stored together (physical storage), in sorted order by sort key value. 
 - Some attributes can be scalar (one value) or nested (recursive dictionary up to 32 levels deep).
+
+## DynamoDB Operation, Consistency and Performance
+
+- We can chose between to different capacity mode at table creation: on-demand and provisioned
+- We may be able to switch between this capacity mode afterwards
+- On-demand capacity mode: 
+    - Designed for unknown, unpredictable load
+    - Requires low administration
+    - We don't have to explicitly set capacity settings, all handled by DynamoDB
+    - We pay a price per million R or W unit
+- Provisioned capacity mode:
+    - We set the RCU/WCU per table
+- Every operation consumes at least 1RCU/WCU
+- 1 RCU is `1 * 4KB` read operation per second for strongly consistent reads, `2 * 4KB` read operations per second for eventual consistent reads
+- 1 WCU is `1 * 1KB` write operation per second
+- Every table has a RCU and WCU bust pool (300 seconds)
+- DynamoDB operations:
+    - **Query**:
+        - When a query is performed we need to take a partition key
+        - Query item can return 0 or more items, but we have to specify the partition key every time
+        - We can specify specific attribute we would want to be returned, we will be charged for querying the whole item anyway
+    - **Scan**:
+        - Least efficient operation, but the most flexible
+        - Scan moves through a table consuming the capacity of every item
+        - Any attribute can be used and any filters can be applied, but scan will consume the capacity for every item scanned through
+- DynamoDB can operate using two different consistency modes:
+    - Eventually consistent
+    - Strongly consistent
+- DynamoDB replicates data cross AZs using storage nodes. Storage nodes have a leader node, which is elected from the existing nodes
+- Writes are directed to leader node
+- The leader nodes replicates data to other nodes, typically finishing within a few milliseconds
+
+## WCU/RCU Calculation
+
+- Example: we need to store 10 items per second, 2.5K average size per item
+    - WCU required: 
+        ```
+        ROUND UP(ITEM SIZE / 1 KB) => 3
+        MULT by average (30) => WCU required = 30
+        ```
+- Example: we need to retrieve 10 items per second, 2.5K average size per item
+    - RCU required:
+        ```
+        ROUND UP (ITEM SIZE / 4 KB) => 1
+        MULT by average read ops per second (10) => Strongly consistent reads = 10, Eventually consistent reads => 5
+
 ###  Search types: Query and Scan.
 - Query: 
 	- Finds items using the primary key.
@@ -32,16 +78,37 @@
 - Supports Cross-Region Replication (see "Global Tables" below).
 - Supports automatic deletion of expired items.
 
-### DynamoDB Secondary Indexes:
-- A data structure that contains a subset of attributes from a table, along with an alternate key to support Query operations. 
-- When you create a secondary index, you define an alternate key for the index (partition key and sort key) and the attributes that you want to be projected (copied) from the base table into the index. 
-- Data is automatically maintained by DynamoDB upon change in the base table.
-- You can create one or more secondary indexes on a table. 
-- Can be single or composite (partition key and sort key).
-- Support also Scan operations. 
-- Two types of secondary indexes:
-	- Global: with a partition key and sort key that can be different from those on the table. It is considered "global" because queries on the index can span all of the data in the base table, across all partitions. 
-	- Local:has the same partition key as the table, but a different sort key. It is considered "local" in the sense that every partition of a local secondary index is scoped to a base table partition that has the same partition key value. 
+## DynamoDB Indexes
+
+- Are way to improve efficiency of data retrieval from DynamoDB
+- Indexes are alternative views on table data, allowing the query operation to work in ways that it couldn't otherwise
+- Local Secondary Indexes allow to create a view using different sort key, Global Secondary Indexes allow to create create different partition and sort key
+
+### Local Secondary Indexes (LSI)
+
+- **Must be created with the base table!**
+- We can have at max 5 LSIs per base table
+- LSIs are alternative sort key, same partition key
+- They share the same RCU and WCU with the main table
+- Attributes which can be projected into LSIs: `ALL`, `KEYS_ONLY`, `INCLUDE` (we can specifically pick which attribute to be included)
+- Indexes are sparse: only items which have a value in the index alternative sort key are added to the index
+
+### Global Secondary Indexes (GSI)
+
+- They can be created at any time
+- It is a default limit of 20 GSIs per base table
+- We cane define different partition and sort keys
+- GSIs have their own RCU and WCU allocations
+- Attributes projected into the index: `ALL`, `KEYS_ONLY`, `INCLUDE`
+- GSIs are also sparce, only items which have values in the new PK and optional SK are added to the index
+- GSIs are always eventually consistent, the data is replicated from the main table
+
+### LSI and GSI Considerations
+
+- We have to be careful with the projection, more capacity is consumed if we project unnecessary attributes
+- If we don't project a specific attribute and require that when querying the index, it will fetch the data from the main table, the query becoming inefficient
+- AWS recommends using GSIs as default, LSI only when strong consistency is required
+
 
 ### DynamoDB Partitions and Data Distribution:
 - DynamoDB stores data in partitions. 
@@ -89,6 +156,15 @@
 - Each node runs its own instance of the DAX caching software. 
 - One of the nodes serves as the primary node for the cluster. 
 - Additional nodes (if present) serve as read replicas.
+- DAX operates within a VPC, designed to be deployed in multiple AZs in a VPC
+- DAX is a cluster service, nodes are placed in different AZs. There a primary nodes from which data is replicated into replica nodes
+- DAX maintains 2 different caches:
+    - Items cache: holds results of (`Batch`)`GetItem` calls
+    - Query cache: holds the collection of items based on query/scan parameters
+- DAX is accessed via an endpoint. This endpoint load balances across nodes
+- Cache hits are returned in microseconds, cache misses in milliseconds
+- When writing data to DynamoDB, DAX uses write-through caching, the data is written at the same time to the cache as it is written to the DB
+- DAX is not suitable for applications requiring strongly consistent reads
 
 ### DynamoDB Global Tables:
 - Provide a fully managed solution for deploying a multiregion, multi-active database.
@@ -135,13 +211,44 @@
 	- AWS Kinesis (DynamoDB Streams Kinesis Adapter). 
 	- Lamda trigger: AWS Lambda polls the stream and invokes your Lambda function synchronously when it detects new stream records. 
 
-### DynamoDB Backup:
+- A stream is a time ordered list of item changes in a DynamoDB table
+- A stream is a 24H rolling window
+- Streams has to be enabled per table basis
+- Streams record inserts, updates and deletes
+- We can create different view types influencing what is in the stream
+- Available view types:
+    - `KEYS_ONLY`: the stream will only record the partition key and available sort keys for items which did change
+    - `NEW_IMAGE`: stores the entire item with the new state after the change
+    - `OLD_IMAGE`: stores the entire state of the item before the change
+    - `NEW_AND_OLD_IMAGE`: stores the before/after states of the items in case of a change
+- In some cases the new/old states recorded can be empty, example in case of a deletion the new state of an item is blank
+- Streams are the foundation for database triggers
+- An item change inside a table generate an event, which contains the data which changed
+- An action is taken using that data in RDSIAMAuthentication of event
+- We can use streams and Lambda in case of changes and events
+- Streams and triggers are useful for data aggregation, messaging, notifications, etc.
+
+## DynamoDB Backups
+
+
+- Point-in-time Recovery:
+    - Not enabled by default, has to be enabled
+    - It is a continuous record of changes
+    - Allows replay to any point in the window (35 days recovery window)
+    - From this 35 day window we can restore to another table with a 1 second granularity
+
 Two types of backups:
 - on-demand backup: 
 	- full backups of your tables for long-term archival.
 	- All on-demand backups are cataloged, discoverable, and retained until explicitly deleted. 
 	- Can be scheduled using AWS Backup.
-- continuous automatic backups: 
+    - We can retain or remove indexes
+    - We can adjust encryption settings
+- continuous automatic backups(Point-in-time Recovery): 
+    - Not enabled by default, has to be enabled
+    - It is a continuous record of changes
+    - Allows replay to any point in the window (35 days recovery window)
+    - From this 35 day window we can restore to another table with a 1 second granularity
 	- enables Point-in-time Restore (PITR),
 	- you can restore to any time between 5 minutes and 35 days.
 Both types support cross-region restores.

@@ -42,3 +42,20 @@
 - AWS SSO Integrates deeply with the AWS Organizations service.
 - Enabling AWS SSO, including enabling AWS Organizations, has no impact on the users, roles, or policies that you’re already managing in IAM.
 - AWS SSO also supports the System for Cross-domain Identity Management (SCIM) standard for enabling automatic provisioning of users and groups from Azure AD or Okta Universal Directory to AWS. 
+
+# SSO
+
+- A way to use existing enterprise identity store with AWS
+- Allows to centrally manage SSO access to multiple AWS accounts and external business applications as well
+- Replaces the historical uses cases provided by SAML 2.0
+- Flexible Identity store: where identities are stored. Allows for external identities to be swapped with AWS credentials
+- AWS SSO supports:
+    - Built-in identity store
+    - AWS Managed Microsoft AD
+    - On-premise Microsoft AD
+    - External Identity Provider - SAML 2.0
+- AWS SSO is preferred by AWS for any "workforce" (enterprise) identity federation over the traditional SAML 2.0 based identity federation
+
+## AWS SSO Architecture
+
+![AWS SSO](images/AWSSSO.png)

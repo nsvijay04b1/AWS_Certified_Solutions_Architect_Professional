@@ -1,5 +1,52 @@
 # Elastic Load Balancer (ELB):
 
+
+## ELB Architecture
+
+- It is the job of the load balancer to accept connection from an user base and distribute it to the underlying services
+- ELBs support many different type of compute service
+- LB architecture:
+![LB Architecture](images/ELBArchitecture1.png)
+- Initial configurations for ELB:
+    - IPv4 or double stacking (IPv4 + IPv6)
+    - We have to pick the AZ which the LB will use, specifically we are picking one subnet in 2 or more AZs
+    - When we pick a subnet, AWS places one or more load balancer nodes in that subnet
+    - When an LB is created, it has a DNS A record. The DNS name resolves all the nodes located in multiple AZs. The nodes are HA: if the node fails, a different one is created. If the load is to high, multiple nodes are created
+    - We have to decide on creation if the LB is internal or internet facing (have public IP addresses or not)
+- Listener configuration: what the LB is listening to (what protocols, ports etc.)
+- An internat facing load balancer can connect to both public and private instances
+- Minimum subnet size for a LB is /28 - 8+ fee addresses per subnet (AWS suggests a minimum of /27)
+
+## Cross-Zone Load Balancing
+
+- Initially each LB node could distribute traffic to instances in the same AZ
+- Cross-Zone Load Balancing: allows any LB node to distribute connections equally across all registered instances in all AZs
+
+## User Session State
+
+- Session state: 
+    - A piece of server side information specific to one single user of one application
+    - It does persist while the user interacts with the application
+    - Examples of session state: shopping cart, workflow position, login state
+- The date representing a sessions state is either stored internally or externally (stateless applications)
+- Externally hosted session:
+    - Session data is hosted outside of the back-end instances => application becomes stateless
+    - Offers the possibility to do load balancing for the back-end instances, the session wont get lost in case the LB redirects the user to a different instance
+
+## ELB Evolution
+
+- Currently there are 3 different types of LB in AWS
+- Load balancers are split between v1 and v2 (preferred)
+- LB product started with Classic Load Balancers (v1)
+- CLBs can load balance http and https and lower level protocols as well, although they can not understand the http protocol
+- CLBs can have only 1 SSL certificates
+- They can not be considered entirely being a layer 7 product
+- Application Load Balancer (ALB - v2 LB) are layer 7 products supported HTTP(S) and WebSocket
+- Network Load Balancers (NLB) are also v2 load balancers supporting lower level protocols such as TCP, TLC and UDP
+
+
+# ELB 
+
 ELB Load Balancer types in AWS:
 - Application LB (ALB or ELBv2)
 - Classic LB (ELBv1)
@@ -146,3 +193,19 @@ ELB Security policies:
 	- You can use either the default security policy or one of the other predefined security policies (to disable for example an SSL version).
 	- You cannot create a custom security policy.
 - For other ELBs, you can create a custom security policy.
+
+# Session Stickiness
+
+- Stickiness: allows us to control which backend instance to be used for a given connection
+- With no stickiness connections are distributed across all backend services
+- Enabling stickiness:
+    - CLB: we can enable it per LB
+    - ALB: we can enable it per target group
+- When stickiness is enabled, the LB generates a cookie: `AWSALB` which is delivered to the end-user
+- This cookie has a duration defined between 1 sec and 7 days
+- When the user accesses the LB, it provides the cookie to the LB
+- The LB than can decide to route the connection to the same backend instance every time while the cookie is not expired
+- Change of the backed instance if the cookie is present:
+    - If the instance to which the cookie maps to fails, then a new instance will be selected
+    - If the cookie expires => the cookie will be removed, new cookie is created while a new instance is chosen
+- Session stickiness problems: load can become unbalanced

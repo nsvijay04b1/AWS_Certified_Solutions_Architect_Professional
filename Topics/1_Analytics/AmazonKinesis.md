@@ -6,7 +6,6 @@ Kinesis Stream family:
 - Kinesis Data Analytics: Process and analyze streaming data using SQL or Java.
 - Kinesis Video Streams: Capture, process, and store video streams for analytics and machine learning.
 
-====================================================
 
 # Kinesis Data Streams:
 - A Kinesis data stream is an ORDERED sequence of data records meant to be written to and read from in real time. 
@@ -40,15 +39,26 @@ Kinesis Stream family:
 - If you need to send stream records directly to services such as S3, Redshift or Splunk, it’s better to use Kinesis Data Firehose.
 - Supports Server Side Encryption using AWS KMS.
 
-====================================================
 
 # Kinesis Data Firehose:
 - A fully managed service for delivering real-time streaming data to delivery streams for archiving and analysis purposes. 
+- Firehose can accept data directly from producers or from Kinesis Data Streams
+- Firehose receives the data in real-time, but the ingestion is buffered
+- Data Firehose scales automatically, it is serverless and resilient
+- It is not a real time product, it is a Near Real Time product with a deliver product of ~60 seconds
+- Supports transformation of data on the fly using Lambda. This transformation can add latency
+- Firehose is a pay as you go service, we pay per volume of dat
+- Firehose buffer by default waits for 1MB of data in 60 seconds before delivering to consumer. For higher load, it will deliver every time there is an 1MB chunk of data
 - Sources can be:
 	- Your application pushing directly data into the delivery stream.
 	- AWS services like AWS IoT, CloudWatch Logs and CloudWatch Events.
 	- Kinesis Data Stream.
-- Destinations include Amazon S3, Redshift, Elasticsearch, Splunk, and any custom HTTP endpoint.
+- Firehose supported destinations:
+    - HTTP endpoints
+    - Splunk
+    - RedShift
+    - ElasticSearch
+    - S3
 - Data Processing:
 	- You can also configure Kinesis Data Firehose to transform your data before delivering it. 
 	- Transformation is done using Lambda functions.
@@ -58,8 +68,12 @@ Kinesis Stream family:
 - Supports records up to 1 MB.
 - Stores data for up to 24 hours in case of delivery failure.
 - Supports Server Side Encryption using AWS KMS.
+- Data is sent directly form Firehose to destination, exception being Redshift, where data is stored in an intermediary S3 bucket
+- Firehose use cases:
+    - Persistence for data coming into Kinesis Data Streams
+    - Storing data in a different format (ETL)
 
-====================================================
+
 
 # Kinesis Data Analytics:
 - Service to Process and analyze streaming data using SQL or Apache Flink.
@@ -74,8 +88,21 @@ Kinesis Stream family:
 	- A series of SQL statements that process input and produce output.
 	- You can write SQL statements against in-application streams and reference tables. You can also write JOIN queries to combine data from both of these sources. 
 - Data journey: Streaming Sources ==> In-application input streams ==> Application Code ==> In-application output streams ==> External destinations.
+- It is a real-time data processing product using SQL
+- The product ingests data from Kinesis Data Streams or Firehose
+- After the data is processed, it can be sent directly to destinations such as:
+    - Firehose (data becoming near-real time)
+    - Kinesis Data Streams
+    - AWS Lambda
+- Kinesis Data Analytics architecture:
+    ![Kinesis Data Analytics architecture](images/KinesisDataAnalytics.png)
+- Kinesis Data Analytics use cases:
+    - Anything using stream data which needs real-time SQL processing
+    - Time-series analytics: election data, e-sports
+    - Real-time dashboards: leader boards for games
+    - Real-time metrics
 
-====================================================
+
 
 # Kinesis Video Streams:
 - A fully managed AWS service that you can use to stream live video from devices to the AWS Cloud, or build applications for real-time video processing or batch-oriented video analytics. 
@@ -86,4 +113,12 @@ Kinesis Stream family:
 - You can Durably store, encrypt, and index data.
 - Amazon Kinesis Video Streams with WebRTC: enables you to securely live stream media or perform two-way audio or video interaction between any camera IoT device and WebRTC-compliant mobile or web players. 
 
-====================================================
+
+# SQS vs Kinesis Data Streams
+
+- Is it about ingestion (Kinesis) of data or about decoupling, worker pools (SQS)
+- SQS usually has 1 production group, 1 consumption group
+- SQS is designed for decoupling and asynchronous communication
+- SQS does not have the concept of persistence, no window for persistence
+- Kinesis is designed for huge scale ingestion, having multiple consumers with different rate of consumption
+- Kinesis is recommended for ingestion, analytics, monitoring, click streams

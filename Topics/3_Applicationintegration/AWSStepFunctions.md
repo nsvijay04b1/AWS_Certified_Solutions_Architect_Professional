@@ -12,3 +12,15 @@
 - Callback tasks:
 	- Callback tasks provide a way to pause a workflow until a task token is returned. 
 	- A task might need to wait for a human approval, integrate with a third party, or call legacy systems. 
+
+## States
+
+- Available states:
+    - `SUCCEED` and `FAIL`
+    - `WAIT`: wait for a certain period or time or until a date
+    - `CHOICE`: allows a state machine to take a different path depending on an input
+    - `PARALLEL`: allows to create parallel branches in a state machine
+    - `MAP`: expects a list of things, for which it might perform a certain set of things
+    - `TASK`: represents a single unit of work performed by a state machine. They can be integrated with: Lambda, Batch, DynamoDB, ECS, SNS, SQS, Glue, SageMaker, EMR, etc.
+
+

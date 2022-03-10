@@ -93,15 +93,15 @@
 - Dedicated Instance.
 - Capacity Reservation.
 
-On-Demand Instance:
+### On-Demand Instance:
 - pay by the second.
 - vCPU-based limits per account and per region.
 - Instance usages are billed for any time your instances are in a "running" state. 
 
-Saving Plans:
+### Saving Plans:
 - commitment to a consistent amount of usage, in USD per hour, for a term of 1 or 3 years.
 
-Reserved Instance (RI): 
+### Reserved Instance (RI): 
 - Is a billing benefit and not an instance type.
 - When AWS finds an on-demand instance matching your reservation attributes, it applies the reservation rates to this running instance.
 - Payment can be upfront or monthly payment or a mix. The more you pay upfront for your reservation, the greater is your discount.
@@ -124,7 +124,7 @@ Zonal RI:
 - You can change AZ within the same region.
 - Instance size change not supported.
 
-Spot instances:
+## EC2 Spot Instances
 - AWS unused capacity.
 - up to a 90% discount compared to On-Demand prices. 
 - You specify the maximum price you are willing to pay and AWS will allocate Spot instances to you whenever the Spot price is lower than this maximum price your specified. 
@@ -133,20 +133,30 @@ Spot instances:
 - Termination notices are issued 2 minutes prior to removal (except for hibernation). 
 - When requesting a spot instance you can make a "Persistent Request" so that AWS keeps trying to spin your instance after it is removed.
 
-Spot Fleet:
+### Spot Fleet:
 - A collection, or fleet, of Spot Instances, and optionally On-Demand Instances. 
 - Attempts to launch the number of Spot Instances and On-Demand Instances to meet the target capacity that you specified in the Spot Fleet request.
 - Attempts to maintain its target capacity fleet if your Spot Instances are interrupted.
 - When Spot Fleet attempts to fulfill your On-Demand capacity, and you have defined multiple on-demand instance types, it will try to launch the lowest-priced instance type first. You can alter this by defining a custom priority (allocation strategy).
+- Spot Fleet - set of spot instances + (optional) on-demand instances
+- The spot fleet will try to meet the target capacity with price constraints
+- A launch pool can have the following can have different instance types, OS, AZ
+- We can have multiple launch pools, so the fleet can choose the best
+- Spot fleet will stop launching instances the target capacity is reached
+- Strategies to allocate spot instances:
+    - **lowestPrice**: the spot fleet will launch instances from the pool with the lowest price
+    - **diversified**: distribute instances across all pools
+    - **capacityOptimized**: launch instances based on the optimal capacity for the number of instances
+- Spot fleets allow us to automatically request spot instances with the lowest price
 
-Spot blocks:
+### Spot blocks:
 - Spot Instances with a defined duration.
 - designed not to be interrupted and will run continuously for the duration you select. 
 - You can use a duration of 1, 2, 3, 4, 5, or 6 hours.
 - The price that you pay depends on the specified duration. 
 - In rare situations, Spot blocks may be interrupted due to Amazon EC2 capacity needs. You are not billed for interrupted instances.
 
-Dedicated Hosts:
+## Dedicated Hosts:
 - A physical server with EC2 instance capacity fully dedicated to your use. 
 - Allow you to use your existing per-socket, per-core, or per-VM software licenses (BYOL).
 
@@ -230,24 +240,49 @@ Auto Scaling with ELB:
 - On Linux: the key pair file is used for SSH connections.
 - On Windows: the key pair is used when you click « Get Administrator Password » on the instance.
 
-### Placement Groups:
+## Placement Groups:
 - When you launch a new EC2 instance, the EC2 service attempts to place the instance in such a way that all of your instances are spread out across underlying hardware to minimize correlated failures.
 - You can use placement groups to influence the placement of a group of interdependent instances to meet the needs of your workload. 
 - Placement strategies: Cluster, Partition, Spread.
-- Cluster Placement Groups:
-	- Packs instances close together inside an Availability Zone (same rack).
-	- Enables low network latency or high network throughput.
-	- Enhanced Networking is recommended.
-	- Limited to some instance types. Recommended to use the same instance type in the placement group.
-	- Can span peered VPCs but you will not get the full bandwidth.
-- Partition Placement Groups: 
-	- Spreads your instances across logical partitions such that groups of instances in one partition do not share the underlying hardware with groups of instances in different partitions. 
-	- Can have partitions in multiple Availability Zones in the same Region. 
-	- Max 7 partitions per AZ.
-	- A partition placement group with Dedicated Instances can have a maximum of two partitions.
-- Spread Placement Groups:
-	- Strictly places a small group of instances across distinct underlying hardware to reduce correlated failures. 
-	- Dedicated Instances not supported.
+
+#### Cluster Placement Groups
+
+- Used for highest possible performance
+- Best practice is to launch all of the instances at the same time which will be part of the placement group. This ensures that AWS allocates capacity in the same location
+- Cluster placement groups are located in the same AZ, when the first instance is launched, the AZ is locked
+- Ideally the instances in a cluster placement group are located on the same rack, often on the same EC2 host
+- All instances have fast bandwidth between each other (max 10Gbps vs 5Gbps which can be achieved normally)
+- They offer the lowest latency possible and max PPS possible in AWS
+- To achieve these levels of performance we need to use instances with high performant networking: instances with more bandwidth and with Enhanced Networking
+- Cluster placement groups should be used for highest performance. They offer no HA and very little resilience
+- Considerations for cluster placement groups:
+    - We can not span AZs, the AZ is locked when the first instance is launching
+    - We can span VPC peers, but this will impact performance negatively
+    - Cluster placement groups are not supported for every instance type
+    - *Recommended*: use the same type of instances and launch them at the same time
+    - Cluster placement groups offer 10 Gbps for single stream performance
+
+#### Spread Placement Groups
+
+- They offer the maximum possible availability and resiliency
+- They can span multiple AZs
+- Instances in the same spread placement group are located on different racks, having isolated networking and power supplies
+- There is a limit for 7 instances per AZ in case of spread placement groups
+- Considerations:
+    - Spread placement provides infrastructure isolation
+    - Hard limit: 7 instances per AZ
+    - We can not use dedicated instances or hosts
+
+#### Partition Placement Groups
+
+- Similar to spread placement groups
+- They are designed for situations when we need more than 7 instances per AZ but we still need separation
+- Can be created across multiple AZs in a region
+- At creation we specify the number of partition per AZ (max 7 per AZ)
+- Each partition has its own rack with isolated power and networking
+- We can launch as many instances as we need in a partition group
+- Use cases for partition groups: HDFS, HBase, Cassandra, topology aware applications
+- Instances can be placed in a specific partition or we can let AWS to decide
 - An instance can belong to only one placement group.
 - Existing instances cannot be moved into a placement group.
 - PGs cannot be merged.

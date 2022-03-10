@@ -1,5 +1,15 @@
 # AWS IoT: 
 
+- IOT - Internet of Things
+- AWS IOT is a product set in AWS, used for managing millions of IOT devices
+- IOT devices can be temp, wind, water sensors, light sensors, valve control sensors, etc.
+- All of these need to be registered into a system to allow secure communication for managing them: provisioning, updates and control
+- Communication to or from devices is likely to be unreliable, AWS provides *device shadows*: virtual representations of actual devices, having the same configuration registered for the actual device. We can read from them the last communicated data, essentially the device communicates with the shadow, the last registered data can be retrieved anytime afterwards
+- Device messages are sent JSON format, using MQTT protocols
+- AWS IOT provides rules: event-driven integration with other AWS Services
+- AWS IOT architecture:
+    [AWS IOT architecture](images/ElasticTranscoder&AWSIoT.png)
+
 AWS IOT provides the cloud services that connect your IoT devices to other devices and AWS cloud services. 
 
 IoT Architecture Components:
@@ -18,8 +28,6 @@ IoT Architecture Components:
 	- AWS IoT Events
 	- AWS IoT Analytics
 
-======================================
-
 FreeRTOS:
 - FreeRTOS is an open source, real-time operating system for microcontrollers that lets you include small, low-power edge devices in your IoT solution. 
 - FreeRTOS includes a kernel and a growing set of software libraries that support many applications. 
@@ -37,7 +45,7 @@ AWS IoT Device SDKs:
 - Help you efficiently connect your devices to AWS IoT.
 - Include open-source libraries, developer guides with samples, and porting guides so that you can build innovative IoT products or solutions on your choice of hardware platforms.
 
-======================================
+
 
 AWS IoT Core:
 - A managed cloud service that enables connected devices to securely interact with cloud applications and other devices. 
@@ -73,7 +81,7 @@ AWS IoT Things Graph:
 - A service that lets you visually connect different devices and web services to build IoT applications.
 - Provides a visual drag-and-drop interface for connecting and coordinating interactions between devices and web services, so that you can build IoT applications efficiently.
 
-======================================
+
 
 AWS IoT Analytics:
 - Lets you efficiently run and operationalize sophisticated analytics on massive volumes unstructured IoT data. 
@@ -89,3 +97,13 @@ AWS IoT Events:
 - Detects and responds to events from IoT sensors and applications. 
 - Events are patterns of data that identify more complicated circumstances than expected, such as motion detectors using movement signals to activate lights and security cameras. 
 - AWS IoT Events continuously monitors data from multiple IoT sensors and applications, and integrates with other services, such as AWS IoT Core, IoT SiteWise, DynamoDB, and others to enable early detection and unique insights.
+
+
+## AWS Greengrass
+
+- AWS Greengrass is an extension of the services provided by AWS IOT, moving those services closer to the edge
+- Greengrass allow some services like compute, messages, data management, sync and ML capabilities to run from edge devices
+- Devices which Greengrass software can locally run Lambda functions, containers
+- Provides local device shadows which are synced back to AWS
+- Allows messaging using MQTT
+- Allows local hardware access for Lambda functions

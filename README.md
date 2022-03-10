@@ -79,6 +79,7 @@ The AWS Certified Solutions Architect – Professional (SAP-C01) exam preparatio
  - [Amazon RDS](Topics/8_Database/RDS.md)
  - [Amazon Redshift](Topics/8_Database/RedShift.md)
  - [Amazon DocumentDB](Topics/8_Database/DocumentDB.md)
+ - [Amzon QLDB](Topics/8_Database/QLDB.md)
 
 ## 9. Developer tools:
  - [AWS Cloud9](Topics/9_Developertools/Cloud9.md)
@@ -90,7 +91,7 @@ The AWS Certified Solutions Architect – Professional (SAP-C01) exam preparatio
 
 ## 10. End user computing:
  - Amazon AppStream 2.0
- - Amazon WorkSpaces
+ - [Amazon WorkSpaces](Topics/10_Endusercomputing/workspaces.md)
 
 ## 11. Front-end web and mobile:
  - [AWS AppSync](Topics/11_Front-end_web_and_mobile/AppSync.md)
@@ -121,6 +122,7 @@ The AWS Certified Solutions Architect – Professional (SAP-C01) exam preparatio
  - [AWS Systems Manager](Topics/13_Management_Governance/AWS_SSM.md) 
  - [AWS Trusted Advisor](Topics/13_Management_Governance/Trusted_Advisor.md) 
  - [AWS Well-Architected Tool](Topics/13_Management_Governance/well_architected_tool.md)
+ - [AWS XRAY](Topics/13_Management_Governance/Xray.md)
 
 ## 14. Media services:  
  - Amazon Elastic Transcoder
@@ -138,7 +140,7 @@ The AWS Certified Solutions Architect – Professional (SAP-C01) exam preparatio
  - [Amazon API Gateway](Topics/16_Networking_contentDelivery/apigateway.md)  
  - [Amazon CloudFront](Topics/16_Networking_contentDelivery/CloudFront.md)
  - [AWS Direct Connect](Topics/16_Networking_contentDelivery/DirectConnect(DX).md)
- - AWS Global Accelerator  
+ - [AWS Global Accelerator](Topics/16_Networking_contentDelivery/GlobalAccelerator.md)  
  - [Amazon Route 53](Topics/16_Networking_contentDelivery/route53.md)
  - [AWS Transit Gateway](Topics/16_Networking_contentDelivery/transit_gateway.md)
  - [Amazon VPC](Topics/16_Networking_contentDelivery/VPC.md)
