@@ -1,0 +1,14 @@
+# AWS Control Tower:
+- Orchestration layer that facilitates account deployment and account governance. 
+- Provides the easiest way to set up and govern a secure, compliant, multi-account AWS environment based on best practices established by working with thousands of enterprises. 
+- With AWS Control Tower, end users on your distributed teams can provision new AWS accounts quickly. Meanwhile your central cloud administrators know that all accounts are aligned with centrally established, company-wide compliance policies. 
+- AWS Control Tower offers reusable reference architectures for best practices.
+- A Landing Zone:
+	- A well-architected, multi-account AWS environment that's based on security and compliance best practices. 
+- Guardrail:
+	- A high-level rule that provides ongoing governance for your overall AWS environment. 
+	- Can be preventive or detective.
+	- Guardrails guidance can be: mandatory, strongly recommended, or elective.
+- Account Factory:
+	- A configurable account template that helps to standardize the provisioning of new accounts with pre-approved account configurations. 
+	- AWS Control Tower offers a built-in Account Factory.

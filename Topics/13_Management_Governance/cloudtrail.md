@@ -1,0 +1,28 @@
+# CloudTrail:
+- Is an AWS service that records actions in AWS that were taken by any user, role or service.
+- Is enabled at the account level.
+- Events types:
+	- Management events = control plane events.
+	- Data events = data plane events. Supported on few services only (S3, Lambda).
+	- Insights = unusual activity in your AWS account.
+- Events history:
+	- You can view, search, and download the past 90 days of activity in your AWS account.
+	- Events download file formats: CSV or JSON. 
+	- To keep more history, configure a trail that stores events to S3 or CLoudWatch Logs.
+- CloudTrail trails:
+	- A trail is a configuration that enables delivery of events to an Amazon S3 bucket, CloudWatch Logs and CloudWatch Events.
+	- Enables you to archive, analyze, and respond to changes in your AWS resources.
+	- A trail can limit the scope of events.
+	- A trail can be applied to all regions.
+	- If you use AWS Organizations, the Master Account can apply a trail to the whole organization.
+- Events delivery time:
+	- Logs are delivered within an average of about 15 minutes of an API call. No SLA.
+	- Events are delivered to the CloudWatch Events bus in near-realtime.
+- Delivering log files to S3:
+	- Log files are compressed JSON files.
+	- Log files can be encrypted.
+	- A trail can send an SNS notification upon log file delivery.
+	- You can enable "log file validation": validates that the log files have not been modified/replaced.
+- A trail can be applied to all Regions or a single Region.
+- For global services such as IAM, STS, and CloudFront, events are delivered to any trail that includes global services (--include-global-service-events option).
+- To create an alarm on some API activity, you should create a trail that sends the events to CloudWatch Logs and create an alarm in CloudWatch Logs.

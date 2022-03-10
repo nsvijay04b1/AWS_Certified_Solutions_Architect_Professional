@@ -58,7 +58,7 @@ The AWS Certified Solutions Architect – Professional (SAP-C01) exam preparatio
  - [Elastic Load Balancing](Topics/6_Compute/ELB.md)
  - [AWS Fargate](Topics/6_Compute/Fargate.md)
  - [AWS Lambda](Topics/6_Compute/Lambda.md)
- - [Amazon Lightsail](Topics/6_Compute/AmazonLightsail.md)
+ - [Amazon Lightsail/Amplify](Topics/6_Compute/AmazonLightsail.md)
  - [AWS Outposts](Topics/6_Compute/AWSOutposts.md)
 ## 7. Containers:
  - Amazon Elastic Container Registry (Amazon ECR)
@@ -90,26 +90,26 @@ The AWS Certified Solutions Architect – Professional (SAP-C01) exam preparatio
  - Amazon Translate
 ## 13. Management and governance:  
  - AWS Auto Scaling  
- - AWS Backup  
+ - [AWS Backup/DLM](Topics/13_Management_Governance/backup.md) 
  - AWS CloudFormation  
- - AWS CloudTrail  
- - Amazon CloudWatch  
+ - [AWS CloudTrail](Topics/13_Management_Governance/cloudtrail.md)  
+ - [Amazon CloudWatch](Topics/13_Management_Governance/cloudwatch.md)
  - AWS Compute Optimizer  
- - AWS Config  
- - AWS Control Tower  
+ - [AWS Config](Topics/13_Management_Governance/config.md)  
+ - [AWS Control Tower](Topics/13_Management_Governance/control_tower.md) 
  - Amazon EventBridge  
  - AWS License Manager  
- - AWS Organizations  
- - AWS Resource Access Manager  
- - AWS Service Catalog  
+ - [AWS Organizations](Topics/17_Security_Identity_Compliance/Organizations.md)
+ - [AWS Resource Access Manager](Topics/13_Management_Governance/AWS_RAM.md) 
+ - [AWS Service Catalog](Topics/13_Management_Governance/service_catalog.md)
  - AWS Systems Manager  
- - AWS Trusted Advisor  
- - AWS Well-Architected Tool 
+ - [AWS Trusted Advisor](Topics/13_Management_Governance/Trusted_Advisor.md) 
+ - [AWS Well-Architected Tool](Topics/13_Management_Governance/well_architected_tool.md)
 ## 14. Media services:  
  - Amazon Elastic Transcoder
 ## 15. Migration and transfer:  
  - AWS Database Migration Service (AWS DMS)  
- - AWS DataSync  
+ - [AWS DataSync](Topics/15_Migration_and_transfer/dataSync.md)
  - AWS Migration Hub  
  - AWS Server Migration Service (AWS SMS)  
  - AWS Snowball  
@@ -123,27 +123,35 @@ The AWS Certified Solutions Architect – Professional (SAP-C01) exam preparatio
  - AWS Transit Gateway  
  - Amazon VPC
 ## 17. Security, identity, and compliance:
- - AWS Artifact  
+ - [AWS Artifact](Topics/17_Security_Identity_Compliance/Artifact.md) 
  - AWS Certificate Manager (ACM)  
- - Amazon Cognito  
- - AWS Directory Service  
+ - [Amazon Cognito](Topics/17_Security_Identity_Compliance/Cognito.md)
+ - [AWS Directory Service](Topics/17_Security_Identity_Compliance/AWSDirectoryService.md)
  - Amazon GuardDuty  
- - AWS Identity and Access Management (IAM)  
- - Amazon Inspector  - AWS Key Management Service (AWS KMS)
+ - [AWS Identity and Access Management (IAM)](Topics/17_Security_Identity_Compliance/IAM.md) 
+ - Amazon Inspector  
+ - AWS Key Management Service (AWS KMS)
  - Amazon Macie
  - AWS Resource Access Manager
  - AWS Secrets Manager
  - AWS Security Hub
  - AWS Shield
- - AWS Single Sign-On
+ - [AWS Single Sign-On](Topics/17_Security_Identity_Compliance/SSO.md) 
  - AWS WAF
+ - [AWS STS](Topics/17_Security_Identity_Compliance/STS.md) 
 ## 18. Storage:
- - Amazon Elastic Block Store (Amazon EBS)
- - Amazon Elastic File System (Amazon EFS)
- - Amazon FSx
- - Amazon S3
- - Amazon S3 Glacier
- - AWS Storage Gateway
+ - [Amazon Elastic Block Store (Amazon EBS)](Topics/18_Storage/EBS.md)
+ - [Amazon Elastic File System (Amazon EFS)](Topics/18_Storage/EFS.md)
+ - [Amazon FSx](Topics/18_Storage/FSx.md)
+ - [Amazon S3](Topics/18_Storage/S3.md)
+ - [Amazon S3 Glacier](Topics/18_Storage/glacier.md)
+ - [AWS Storage Gateway](Topics/18_Storage/Storage_gateway.md)
+ - [Amazon WorkDocs](Topics/18_Storage/workdocs.md)
+## 19. Other Services:
+ - [AWS Personal Health Dashboard (PHD)](Topics/19_other_services/AWS_PHD.md)
+ - [AWS Wavelength](Topics/19_other_services/Wavelength.md)
+ - [VMware Cloud on AWS](Topics/19_other_services/WMwareCloudonAWS.md)
+
 
 # Other links to read
 
@@ -159,3 +167,9 @@ The AWS Certified Solutions Architect – Professional (SAP-C01) exam preparatio
 # Credits
 * These notes are based on the AWS Certified Solutions Architect - Professional course by Adrian Cantrill and on [Ultimate AWS Certified Solutions Architect Professional 2022 by Stephane Maarek](https://www.udemy.com/course/aws-solutions-architect-professional/)
 * All images present in the notes are taken from [Adrian Cantrill's GitHub repository](https://github.com/acantril/aws-sa-pro) for his course
+ * https://github.com/acantril/aws-sa-pro
+ * https://github.com/linuxacademy/aws-csa-pro-2019
+ * https://github.com/Ernyoke/certified-aws-solutions-architect-professional
+ * https://github.com/helalaoui/AWS-Solutions-Architect-Certification
+ * https://github.com/jsbonso/AWS-Certified-Solutions-Architect-Professional-SAP-C01-2020
+ 

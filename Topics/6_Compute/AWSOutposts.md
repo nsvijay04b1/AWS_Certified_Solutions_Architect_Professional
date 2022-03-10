@@ -1,0 +1,18 @@
+# AWS Outposts:
+- A fully managed service that extends AWS infrastructure, services, APIs, and tools to customer premises. 
+- An Outpost is a pool of AWS compute and storage capacity deployed at a customer site. 
+- AWS offers multiple Outposts hardware configurations (sizings).
+- Form factor: 42U rack.
+- AWS operates, monitors, and manages this capacity as part of an AWS Region. 
+- Each Outpost is an extension of an Availability Zone and its associated Region. 
+- Each Outpost can support multiple VPCs that can have one or more Outpost subnets.
+- You can create subnets on your Outpost and specify them when you create AWS resources such as EC2 instances, EBS volumes, ECS clusters, and RDS instances.
+- Instances in Outpost subnets communicate with other instances in the AWS Region using private IP addresses, all within the same VPC. 
+- Your on-premises network must provide wide area network (WAN) access back to the Region and to the internet. 
+- Local gateway: 
+	- Logical interconnect virtual router that enables communication between your Outpost and your on-premises network (NAT and BGP advertisement). 
+	- Can also be used for outbound internet traffic.
+- VPC private connectivity options (Outpost to AWS):
+	- service links: an encrypted set of VPN connections that are used whenever the Outpost communicates with your chosen home Region. 
+	- local gateway: the local gateway sends traffic through an existing Direct Connect or S2S VPN.
+- Customers can also deploy multiple Outposts at a site, each tied to a different Availability Zone for even higher availability.

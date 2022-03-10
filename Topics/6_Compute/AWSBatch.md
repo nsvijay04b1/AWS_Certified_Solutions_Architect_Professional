@@ -1,0 +1,12 @@
+# AWS Batch:
+- Regional service that helps you to run batch computing workloads on the AWS Cloud. 
+- Sits in a VPC.
+- Jobs: a unit of work (such as a shell script, a Linux executable, or a Docker container image)
+- A Job runs as a containerized application on AWS Fargate or Amazon EC2 instances.
+- Jobs can reference other jobs by name or by ID, and can be dependent on the successful completion of other jobs. 
+- Job definition includes IAM role, CPU, Memory, container properties, environment variables, persistent storage, …
+- Jobs are submitted to a Job Queue.
+- You associate one or more compute environments with a job queue. You can set priorities.
+- Managed Compute Environment: Fargate or EC2 (including Spot instances).
+- Unmanaged Compute Environment: Batch creates an ECS cluster and you need to manage it (set up, scaling, …).
+- Sensitive data stored in AWS Secrets Manager secrets can be exposed to an AWS Batch job as environment variables or as part of the log configuration

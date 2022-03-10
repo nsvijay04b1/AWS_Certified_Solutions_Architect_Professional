@@ -1,0 +1,11 @@
+# AWS Elastic Beanstalk (EB):
+- With Elastic Beanstalk, you can quickly deploy and manage applications in the AWS Cloud without having to learn about the infrastructure that runs those applications. 
+- It keeps the provisioning of building blocks (e.g., EC2, RDS, ELB Auto Scaling, CloudWatch), deployment of applications, and health monitoring abstracted from the user so they can just focus on writing code. 
+- You simply specify the code or containers to deploy.
+- Supports a large list of platforms: .NET, Docker, Java, Node.js, PHP, Python, …etc.
+- Elastic Beanstalk will automatically handle all the details such as provisioning an Amazon ECS cluster, balancing load, auto-scaling, monitoring, and placing your containers across your cluster. 
+- Elastic Beanstalk is ideal if you want to leverage the benefits of containers but just want the simplicity of deploying applications from development to production by uploading a container image. 
+- You can create versions of your application (stored in S3).
+- You can have multiple environments (prod, dev, test, …).
+- You can change settings in the infrastructure created by EB. For instance, you can change the load balancing parameters of the ELB.
+- You can select different deployment strategies for new application versions (all-at-once, rolling, …).

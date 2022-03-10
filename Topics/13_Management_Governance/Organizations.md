@@ -1,0 +1,35 @@
+# AWS Organizations:
+- Account management service that enables you to consolidate multiple AWS accounts into an organization that you create and centrally manage.
+- Includes account management and consolidated billing capabilities.
+- You can group your accounts into Hierarchical organizational units (OUs) and attach different access policies to each OU. 
+- Root: the parent container for all the accounts for your organization.
+- Organization unit (OU): a container for accounts within the organization hierarchy. 
+- An OU also can contain other OUs, enabling you to create a hierarchy/tree.
+- Accounts are the leaves of the tree.
+- You have one Management Account and the rest are Member Accounts.
+- The Management Account (previously called Master Account) is the account that you use to create and manage the organization.
+- When you attach a policy to one of the nodes in the hierarchy, it flows down and affects all the branches (OUs) and leaves (accounts) beneath it.
+- Invitation: the process of asking another account to join your organization. Can be issued only by the organization's management account. 
+- AWS Organizations has two available feature sets:
+	- Consolidated Billing features. Provides also basic management tools.
+	- All features: default and preferred way to work with AWS Organizations. It includes also all the Consolidated Billing features. 
+- Consolidated Billing:
+	- You can use the consolidated billing feature in AWS Organizations to consolidate billing and payment for multiple AWS accounts.
+	- You can combine the usage across all accounts in the organization to share the volume pricing discounts, Reserved Instance discounts, and Savings Plans.
+	- The management account of an organization can turn off Reserved Instance (RI) discount and Savings Plans discount sharing for any accounts in that organization. 
+- Free service.
+
+# Service Control Policies (SCPs): 
+- An SCP restricts permissions for IAM users and roles in member accounts, including the member account's root user.
+- An SCP Specifies the maximum permissions for member OUs or accounts in an organization.
+- No permissions are granted by an SCP. An SCP defines a guardrail, or sets limits, on the actions that a the administrator of a member account can delegate to the IAM users and roles of this member account. 
+- The administrator of the member account must still attach identity-based or resource-based policies to IAM users or roles, or to the resources in your accounts to actually grant permissions. 
+- The effective permissions are the logical intersection between what is allowed by the SCP and what is allowed by the IAM and resource-based policies. 
+- An SCP can be configured either as:
+	- A deny list: all actions are allowed by default, and you specify what services and actions are prohibited
+	- An allow list: all actions are prohibited by default, and you specify what services and actions are allowed
+- By default, AWS Organizations attaches an AWS managed SCP named FullAWSAccess to the organization's root and every OU and account when it's created: by default all permissions are allowed.
+- SCPs do NOT affect:
+	- Users or roles in the management account. 
+	- Users or roles from accounts outside the organization. Use case: cross-account access using resource-based policies.
+	- Service-linked roles. 

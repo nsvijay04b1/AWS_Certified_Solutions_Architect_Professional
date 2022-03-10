@@ -70,7 +70,7 @@
  - AWS Control Tower  
  - Amazon EventBridge  
  - AWS License Manager  
- - AWS Organizations  
+ - [AWS Organizations](Topics/17_Security_Identity_Compliance/Organizations.md)
  - AWS Resource Access Manager  
  - AWS Service Catalog  
  - AWS Systems Manager  
@@ -96,18 +96,20 @@
 ## 17. Security, identity, and compliance:
  - AWS Artifact  
  - AWS Certificate Manager (ACM)  
- - Amazon Cognito  
- - AWS Directory Service  
+ - [Amazon Cognito](Topics/17_Security_Identity_Compliance/Cognito.md)
+ - [AWS Directory Service](Topics/17_Security_Identity_Compliance/AWSDirectoryService.md)
  - Amazon GuardDuty  
- - AWS Identity and Access Management (IAM)  
- - Amazon Inspector  - AWS Key Management Service (AWS KMS)
+ - [AWS Identity and Access Management (IAM)](Topics/17_Security_Identity_Compliance/IAM.md) 
+ - Amazon Inspector  
+ - AWS Key Management Service (AWS KMS)
  - Amazon Macie
  - AWS Resource Access Manager
  - AWS Secrets Manager
  - AWS Security Hub
  - AWS Shield
- - AWS Single Sign-On
+ - [AWS Single Sign-On](Topics/17_Security_Identity_Compliance/SSO.md) 
  - AWS WAF
+ - [AWS STS](Topics/17_Security_Identity_Compliance/STS.md) 
 ## 18. Storage:
  - Amazon Elastic Block Store (Amazon EBS)
  - Amazon Elastic File System (Amazon EFS)
@@ -115,3 +117,12 @@
  - Amazon S3
  - Amazon S3 Glacier
  - AWS Storage Gateway
+
+
+ * https://github.com/acantril/aws-sa-pro
+ * https://github.com/linuxacademy/aws-csa-pro-2019
+ * https://github.com/Ernyoke/certified-aws-solutions-architect-professional
+ * https://github.com/helalaoui/AWS-Solutions-Architect-Certification
+ * https://github.com/jsbonso/* https://github.com/jsbonso/AWS-Certified-Solutions-Architect-Professional-SAP-C01-2020
+ * 
+
