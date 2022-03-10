@@ -11,3 +11,6 @@
 - Also monitors AWS account access behavior for signs of compromise, such as unauthorized infrastructure deployments, like instances deployed in a Region that has never been used, or unusual API calls, like a password policy change to reduce password strength. 
 - Can trigger remediation actions.
 - Supports a Trusted IP list and multiple Threat lists (lists of known malicious IPs).
+- Supports multiple accounts (Master and Member accounts)
+- GuardDuty architecture:
+    ![GuardDuty architecture](images/AmazonGuardDuty.png)

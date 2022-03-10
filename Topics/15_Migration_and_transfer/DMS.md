@@ -45,3 +45,21 @@ RDS Oracle Migration:
 	- You ship the Edge device or devices back to AWS. The Edge device automatically loads its data into an Amazon S3 bucket.
 	- AWS DMS takes the files from S3 and migrates the data to the target data store.
 	- If you are using CDC, those updates are written to the Amazon S3 bucket and then applied to the target data store.
+
+
+## SCT - Schema Conversion Tool
+
+- SCT is a standalone app used for converting one database engine to another including conversion of schema from a DB to S3
+- SCT is not used when migrating between DBs of the same type
+- SCT works with OLTP DBS (MySQL, Oracle, Aurora, etc.) and OLAP databases (Teradata, Oracle, Vertica, Greenplum, etc.)
+
+## DMS and Snowball
+
+- Larger migrations might imply moving dbs with sizes of multi-TB
+- Moving data over networks takes time and consumes capacity
+- DMS is able to utilise Snowball products to migrate databases
+- Migration steps:
+    1. Use SCT to extract data locally and move the data to a Snowball
+    2. Ship the device back to AWS. They will load the data into an S3 bucket
+    3. DMS migrates from S3 into a target source
+    4. Change Data Capture (CDC) can capture changes and via S3 intermediary they are also written to the target database

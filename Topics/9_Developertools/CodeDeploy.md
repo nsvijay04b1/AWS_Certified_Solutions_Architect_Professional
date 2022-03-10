@@ -24,3 +24,24 @@ Application Deployment strategies:
 	- The actual deployment happens over a period of time.
 	- During that time, new and old versions will coexist without affecting functionality or user experience. 
 	- Unlike the Canary deployment strategy, the phasing is based on parts of the infrastructure and not on groups of users.
+	- CodeDeploy can deploy code to EC2, on-premises, Lambda and Ecs
+- Besides code, it can deploy configurations, executables, packages, scripts, media and many more
+- CodeDeploy integrates with other AWS services such as AWS Code*
+- In order to deploy code on EC2 and on-premises, CodeDeploy requires the presence of an agent
+
+### `appspec.[yaml|json]`
+
+- It controls how deployments occur on the target
+- Manages deployments: configurations + lifecycle event hooks
+- Configuration section:
+    - Files: applies to EC2/on-premises. Provides information about which files should be installed on the instance
+    - Resources: applies to ECS/Lambda. For Lambda it contains the name, alias, current version and target version of a Lambda function. For ECS contains things like the task definition and container details (ports, traffic routing)
+    - Permissions: applies to EC2/on-premises. Details any special permissions and how should be applies to files and folders from the files sections
+- Lifecycle event hooks:
+    - `ApplicationStop`: happens before the application is downloaded. Used for gracefully stop the application
+    - `DownloadBundle`: agent copies the application to a temp location
+    - `BeforeInstall`: used for pre-installation tasks
+    - `Install`: agent copies the application from the temp folder to the final location
+    - `AfterInstall`: perform post-install steps
+    - `ApplicationStart`: used to restart/start services which were stopped during the `ApplicationStop` hook
+    - `ValidateService`: verify the deployment was completed successfully

@@ -1,4 +1,4 @@
-AWS Secrets Manager:
+# AWS Secrets Manager:
 - Enables you to replace hardcoded credentials in your code, including passwords, with an API call to Secrets Manager to retrieve the secret programmatically. 
 - Provides this flexibility by storing the secret as key-value pairs of text strings. 
 - Supports versioning.

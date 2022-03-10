@@ -82,6 +82,7 @@ The AWS Certified Solutions Architect – Professional (SAP-C01) exam preparatio
  - [Amzon QLDB](Topics/8_Database/QLDB.md)
 
 ## 9. Developer tools:
+ - [CI/CD](Topics/9_Developertools/CiCd.md)
  - [AWS Cloud9](Topics/9_Developertools/Cloud9.md)
  - [AWS CodeBuild](Topics/9_Developertools/CodeBuild.md)
  - [AWS CodeCommit](Topics/9_Developertools/CodeCommit.md)
@@ -99,8 +100,8 @@ The AWS Certified Solutions Architect – Professional (SAP-C01) exam preparatio
 ## 12. Machine learning:
  - Amazon Comprehend
  - Amazon Forecast
- - Amazon Lex
- - Amazon Rekognition
+ - [Amazon Lex](Topics/12_MachineLearning/lex.md)
+ - [Amazon Rekognition](Topics/12_MachineLearning/rekognition.md)
  - Amazon SageMaker
  - Amazon Transcribe
  - Amazon Translate
@@ -123,6 +124,7 @@ The AWS Certified Solutions Architect – Professional (SAP-C01) exam preparatio
  - [AWS Trusted Advisor](Topics/13_Management_Governance/Trusted_Advisor.md) 
  - [AWS Well-Architected Tool](Topics/13_Management_Governance/well_architected_tool.md)
  - [AWS XRAY](Topics/13_Management_Governance/Xray.md)
+ - [AWS OpsWorks](Topics/13_Management_Governance/opsworks.md )
 
 ## 14. Media services:  
  - Amazon Elastic Transcoder
@@ -180,6 +182,7 @@ The AWS Certified Solutions Architect – Professional (SAP-C01) exam preparatio
  - [AWS Wavelength](Topics/19_other_services/Wavelength.md)
  - [VMware Cloud on AWS](Topics/19_other_services/WMwareCloudonAWS.md)
  - [AWS IoT](Topics/19_other_services/IOT.md)
+ - [Disaster Recovery](Topics/19_other_services/dr.md)
 
 
 # Other links to read

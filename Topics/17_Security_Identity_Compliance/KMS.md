@@ -1,14 +1,3 @@
-AWS Signature version 4:
-- When you send HTTP requests to AWS services, you (or your client tool/SDK) sign the requests so that AWS can identify who sent them. 
-- You sign requests with your AWS access key, which consists of an access key ID and secret access key.
-- Some requests do not need to be signed, such as anonymous requests to Amazon S3.
-
-Envelope encryption:
-- Envelope encryption is the practice of encrypting plaintext data with a data key, and then encrypting the data key under another key. 
-- The latter key can also be encrypted under a third key, and so on.
-- Eventually, one key must remain in plaintext so you can decrypt the keys and your data. 
-- This top-level plaintext encryption key is known as the master key. 
-
 # AWS Key Management Service (KMS):
 - A fully managed service to create and manage cryptographic keys.
 - You can create symmetric or asymmetric keys.
@@ -16,6 +5,17 @@ Envelope encryption:
 - Enforces permissions to use keys using AWS IAM.
 - KMS keys management is a multi-tenant infrastructure (FIPS level 2). If you require a dedicated infrastructure (FIPS Level 3), use a custom key store (backed with a CloudHSM cluster).
 - In KMS, a master key is called Customer Master Key (CMK).
+
+## AWS Signature version 4:
+- When you send HTTP requests to AWS services, you (or your client tool/SDK) sign the requests so that AWS can identify who sent them. 
+- You sign requests with your AWS access key, which consists of an access key ID and secret access key.
+- Some requests do not need to be signed, such as anonymous requests to Amazon S3.
+
+## Envelope encryption:
+- Envelope encryption is the practice of encrypting plaintext data with a data key, and then encrypting the data key under another key. 
+- The latter key can also be encrypted under a third key, and so on.
+- Eventually, one key must remain in plaintext so you can decrypt the keys and your data. 
+- This top-level plaintext encryption key is known as the master key. 
 
 Customer Master Keys (CMKs):
 - CMK is a logical representation of a master key. The CMK includes metadata, such as the key ID, creation date, description, and key state. 
@@ -103,3 +103,14 @@ CMK Authorization:
 KMS Service Access: 
 - Access to KMS uses a public endpoint (Internet).
 - If you want avoid traversing Internet to communicate with KMS, use a VPC Endpoint and enable the Private DNS Name option
+
+### Key Concepts
+
+- CMKs are isolated to a region and never leave KMS
+- There are 2 types of CMKs: AWS managed (created automatically) and customer managed (much more configurable, can be accessed by other AWS accounts)
+- CMKs support rotation. Rotation is optional for customer managed keys
+- CMK contains the current backing key and previous backing keys caused by rotation
+- We can create aliases for CMKs
+- Key policies and security:
+    - Key Policies (Resource): similar to an S3 bucket policy
+    - Every CMK has a key policy
